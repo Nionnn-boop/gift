@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You 💜</title>
+
+<style>
+body {
+    margin: 0;
+    background: #0b001a;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.card {
+    margin: 60px auto;
+    background: #1a0b2e;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(199,125,255,0.25);
+}
+
+img {
+    width: 200px;
+    border: 3px solid #c77dff;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+button {
+    background: #7b2cbf;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #9d4edd;
+}
+
+#message {
+    margin-top: 15px;
+    white-space: pre-line;
+    font-size: 14px;
+    min-height: 120px;
+}
+
+.confetti {
+    position: fixed;
+    width: 6px;
+    height: 14px;
+    top: -20px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>💜 CONGRATULATIONS 💜</h2>
+
+    <img src="/static/her.jpg">
+
+    <br>
+
+    <button onclick="document.getElementById('music').play()">🎵 Play Music</button>
+    <button onclick="showMessage()">💌 Open Message</button>
+
+    <div id="message"></div>
+</div>
+
+<audio id="music" src="/static/music.mp3" loop></audio>
+
+<script>
+let msg = `You really did it...
+Look how far you've come from where you started...
+Every step forward shows how strong you've become...
+God has guided you quietly through it all...
+and He's still writing something beautiful for you...
+You've grown into someone truly amazing...
+This moment is yours 💜
+I am really proud of you 💜`;
+
+function showMessage(){
+    let i = 0;
+    let box = document.getElementById("message");
+    box.innerHTML = "";
+
+    function type(){
+        if(i < msg.length){
+            box.innerHTML += msg[i];
+            i++;
+            setTimeout(type, 35);
+        }
+    }
+    type();
+}
+
+function confettiBurst(){
+    for(let i=0;i<120;i++){
+        let c = document.createElement("div");
+        c.classList.add("confetti");
+        c.style.left = Math.random()*100 + "vw";
+        c.style.background = ["#7b2cbf","#c77dff","#e0aaff","#9d4edd"][Math.floor(Math.random()*4)];
+        c.style.animationDuration = (2 + Math.random()*2) + "s";
+        document.body.appendChild(c);
+    }
+}
+
+window.onload = confettiBurst;
+</script>
+
+</body>
+</html>
